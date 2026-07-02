@@ -31,7 +31,7 @@ export default function BoxCard({ box }: { box: Box }) {
           href={`/boxes/${box.id}`}
           className="mt-1.5 inline-flex w-fit items-center rounded-[4px] bg-brick px-5 py-1.5 font-bold text-white transition-transform duration-150 hover:scale-95 hover:opacity-90"
         >
-          לפרטים
+          להיכנס לקופסא
         </Link>
       </div>
     </div>

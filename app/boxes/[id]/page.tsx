@@ -45,7 +45,7 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
       </section>
 
       {/* Details card */}
-      <section className="relative z-20 mx-5 -mt-8 rounded-lg bg-white">
+      <section className="relative z-20 mx-[10px] md:mx-5 -mt-8 rounded-lg bg-white">
         <div className="mx-auto flex max-w-[1140px] flex-col gap-10 px-6 py-10 sm:px-10 md:flex-row md:gap-12">
           <Reveal className="text-right md:flex-1">
             <h2 className="text-center text-2xl font-bold text-terracotta md:text-right">
@@ -89,7 +89,7 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
       </section>
 
       {/* Contact CTA */}
-      <section className="mx-5 mt-[20px] rounded-lg bg-brick">
+      <section className="mx-[10px] md:mx-5 mt-[20px] rounded-lg bg-brick">
         <div className="mx-auto max-w-[1140px] px-6 py-10 sm:px-10 sm:py-12">
           <Reveal className="flex flex-col items-center gap-6 text-center">
             <a

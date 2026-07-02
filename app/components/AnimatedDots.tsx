@@ -52,25 +52,56 @@ function seededRandom(seed: number) {
   };
 }
 
+// A closed loop that starts and ends exactly at (cx, cy). baseAngle picks
+// which direction the dot first swings out in, and direction picks
+// clockwise vs counter-clockwise — radius and total arc (a full circle)
+// stay identical, only the path's orientation varies.
+function loopKeyframes(
+  cx: number,
+  cy: number,
+  radius: number,
+  baseAngle: number,
+  direction: 1 | -1,
+  steps = 48
+) {
+  const centerX = cx + Math.cos(baseAngle) * radius;
+  const centerY = cy + Math.sin(baseAngle) * radius;
+  const theta0 = baseAngle + Math.PI;
+  const xs: number[] = [];
+  const ys: number[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const theta = theta0 + direction * (i / steps) * Math.PI * 2;
+    xs.push(centerX + Math.cos(theta) * radius);
+    ys.push(centerY + Math.sin(theta) * radius);
+  }
+  return { xs, ys };
+}
+
 export default function AnimatedDots({
   variant,
   size,
   seed = 1,
+  cardIndex = 0,
   className = "",
 }: {
   variant: "three" | "five" | "six";
   size?: number;
   seed?: number;
+  cardIndex?: number;
   className?: string;
 }) {
   const { width, height, fill, dots } = VARIANTS[variant];
-  const rand = seededRandom(seed);
   const displayWidth = size ?? width;
   const displayHeight = size ? (size / width) * height : height;
+  const rand = seededRandom(seed);
+
+  const duration = 1.2;
+  const cycle = 8;
+  const groupDelay = cardIndex * 1.8;
 
   return (
     <div
-      className={`relative overflow-hidden ${className}`}
+      className={`relative ${className}`}
       style={{ width: displayWidth, height: displayHeight }}
     >
       <svg
@@ -78,22 +109,26 @@ export default function AnimatedDots({
         height={displayHeight}
         viewBox={`0 0 ${width} ${height}`}
         className="block"
+        style={{ overflow: "visible" }}
       >
         {dots.map((dot, i) => {
-          const startX = dot.r + rand() * (width - dot.r * 2);
-          const startY = dot.r + rand() * (height - dot.r * 2);
+          const baseAngle = rand() * Math.PI * 2;
+          const direction = rand() < 0.5 ? 1 : -1;
+          const { xs, ys } = loopKeyframes(dot.cx, dot.cy, dot.r * 0.7, baseAngle, direction);
           return (
             <motion.circle
               key={i}
               r={dot.r}
               fill={fill}
-              initial={{ cx: startX, cy: startY, opacity: 0 }}
-              whileInView={{ cx: dot.cx, cy: dot.cy, opacity: 1 }}
+              initial={{ cx: dot.cx, cy: dot.cy }}
+              whileInView={{ cx: xs, cy: ys }}
               viewport={{ once: false, amount: 0.6 }}
               transition={{
-                duration: 0.4,
-                delay: i * 0.08,
-                ease: "easeOut",
+                duration,
+                delay: 1 + groupDelay + i * 0.08,
+                repeat: Infinity,
+                repeatDelay: cycle - duration,
+                ease: "linear",
               }}
             />
           );

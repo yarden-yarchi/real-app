@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <main className="pb-4">
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-4 pt-[126px] sm:px-6">
+      <section className="mx-auto max-w-6xl px-[10px] pt-[126px] md:px-6">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:pt-6">
             <div className="flex flex-col items-center md:items-start">
@@ -52,7 +52,7 @@ export default async function Home() {
       </section>
 
       {/* Boxes */}
-      <section id="boxes" className="mx-5 mt-12 rounded-lg bg-purple px-4 py-12 sm:px-6 md:mt-16 md:py-16">
+      <section id="boxes" className="mx-[10px] md:mx-5 mt-12 rounded-lg bg-purple px-4 py-12 sm:px-6 md:mt-16 md:py-16">
         <div className="mx-auto max-w-[1140px]">
           <Reveal>
             <h2 className="text-center font-display text-[4em] leading-none text-white md:text-right md:text-6xl md:leading-normal">
@@ -77,7 +77,7 @@ export default async function Home() {
       </section>
 
       {/* Pricing */}
-      <section className="mx-auto mt-12 max-w-6xl px-4 sm:px-6 md:mt-16">
+      <section className="mx-auto mt-12 max-w-6xl px-[10px] md:px-6 md:mt-16">
         <Reveal className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-right">
           <h2 className="text-2xl font-bold text-purple sm:text-3xl">
             אפשרויות רכישה והטמעה בצוות
@@ -99,7 +99,7 @@ export default async function Home() {
                 <h3 className="text-2xl font-bold text-[#3d3238]">קופסא בודדת</h3>
                 <p className="font-display text-4xl text-brick sm:text-5xl">1,350 ₪</p>
               </div>
-              <AnimatedDots variant="three" size={44} seed={1} className="shrink-0 md:order-last" />
+              <AnimatedDots variant="three" size={44} seed={1} cardIndex={0} className="shrink-0 md:order-last" />
             </div>
             <div className="h-px w-full shrink-0 bg-brick/40 md:h-16 md:w-px" />
             <p className="text-lg font-bold text-[#3d3238] md:flex-1">
@@ -119,7 +119,7 @@ export default async function Home() {
                 <h3 className="text-2xl font-bold text-white">הסדרה המלאה - כל הקופסאות!</h3>
                 <p className="font-display text-4xl text-pink-lighter sm:text-5xl">9,800 ₪</p>
               </div>
-              <AnimatedDots variant="five" size={40} seed={2} className="shrink-0 md:order-last" />
+              <AnimatedDots variant="five" size={40} seed={2} cardIndex={1} className="shrink-0 md:order-last" />
             </div>
             <div className="h-px w-full shrink-0 bg-white/40 md:h-16 md:w-px" />
             <div className="space-y-2 text-lg font-bold text-white md:flex-1">
@@ -140,7 +140,7 @@ export default async function Home() {
               <div className="min-w-0 flex-1 text-right text-xl font-bold text-[#3d3238] md:w-[220px] md:shrink-0 md:flex-none">
                 ליווי והטמעה של הקופסאות לאורך שנת לימודים
               </div>
-              <AnimatedDots variant="six" size={36} seed={3} className="shrink-0 md:order-last" />
+              <AnimatedDots variant="six" size={36} seed={3} cardIndex={2} className="shrink-0 md:order-last" />
             </div>
             <div className="h-px w-full shrink-0 bg-brick/40 md:h-16 md:w-px" />
             <div className="space-y-3 text-right md:flex-1">
@@ -172,7 +172,7 @@ export default async function Home() {
       </section>
 
       {/* About */}
-      <section id="about" className="mx-5 mt-12 rounded-lg bg-white md:mt-16">
+      <section id="about" className="mx-[10px] md:mx-5 mt-12 rounded-lg bg-white md:mt-16">
         <div className="mx-auto flex max-w-[1140px] flex-col gap-8 px-6 py-[50px] sm:px-10 md:flex-row md:items-start md:gap-12">
           <Reveal className="relative mx-auto h-[280px] w-[220px] shrink-0 sm:h-[318px] sm:w-[249px]">
             <div className="absolute inset-3 -z-10 rounded-full bg-purple-dark" />
@@ -235,7 +235,7 @@ export default async function Home() {
       </section>
 
       {/* Contact CTA */}
-      <section id="contact" className="mx-5 mt-12 rounded-lg bg-brick md:mt-16">
+      <section id="contact" className="mx-[10px] md:mx-5 mt-12 rounded-lg bg-brick md:mt-16">
         <div className="mx-auto max-w-[1140px] px-6 py-10 sm:px-10 sm:py-12">
           <Reveal className="flex flex-col items-center gap-6 text-center">
             <a

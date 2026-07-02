@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-4">
-      <div className="mx-5 flex h-[62px] items-center justify-between gap-4 rounded-lg bg-white px-5 sm:px-8 md:h-[70px]">
+      <div className="mx-[10px] md:mx-5 flex h-[62px] items-center justify-between gap-4 rounded-lg bg-white px-5 sm:px-8 md:h-[70px]">
         <Link href="/" className="shrink-0">
           <Image
             src="/navmenu-logo.svg"
@@ -65,7 +65,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="mx-5 mt-2 flex flex-col gap-1 rounded-lg bg-pink-light p-4 text-lg text-purple shadow-lg md:hidden">
+        <nav className="mx-[10px] mt-2 flex flex-col gap-1 rounded-lg bg-pink-light p-4 text-lg text-purple shadow-lg md:hidden">
           {navLinks.map((link) => (
             <Link
               key={link.href}
