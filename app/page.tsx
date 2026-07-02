@@ -1,65 +1,259 @@
 import Image from "next/image";
+import { supabaseServer } from "@/lib/supabase-server";
+import BoxCard from "./components/BoxCard";
+import FaqAccordion from "./components/FaqAccordion";
+import ContactForm from "./components/ContactForm";
+import Reveal from "./components/Reveal";
+import AnimatedDots from "./components/AnimatedDots";
 
-export default function Home() {
+export default async function Home() {
+  const { data: boxes } = await supabaseServer.from("boxes").select("*");
+  const { data: faqs } = await supabaseServer
+    .from("faqs")
+    .select("*")
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: true });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            שלום עולם! הפייפליין עובד!
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="pb-4">
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-4 pt-[126px] sm:px-6">
+        <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
+          <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:pt-6">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-brick">
+                למידה היא
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-x-[26px] gap-y-1 md:justify-start">
+                <span className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-terracotta">
+                  מפגש
+                </span>
+                <span className="max-w-[260px] font-sans text-lg font-bold text-purple sm:max-w-[300px] sm:text-xl">
+                  אפשר להחזיר את היצירתיות לכיתה ולהפוך כל שיעור - לשיעור שזוכרים!
+                </span>
+              </div>
+            </div>
+            <p className="text-2xl font-bold text-purple">ערכה פיזית — רב שימושית — מודולארית</p>
+          </Reveal>
+          <Reveal
+            delay={150}
+            className="relative w-full max-w-[300px] shrink-0 md:max-w-[380px] md:flex-1"
           >
+            <div className="relative aspect-[407/508] w-full overflow-hidden rounded-lg bg-pink-light/50" />
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/icons/open-box-tooltip.svg"
+              alt="לחצו על כל קופסא כדי לפתוח אותה"
+              width={164}
+              height={80}
+              className="absolute -bottom-5 -left-4 hidden sm:block"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </Reveal>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Boxes */}
+      <section id="boxes" className="mx-5 mt-12 rounded-lg bg-purple px-4 py-12 sm:px-6 md:mt-16 md:py-16">
+        <div className="mx-auto max-w-[1140px]">
+          <Reveal>
+            <h2 className="text-center font-display text-[4em] leading-none text-white md:text-right md:text-6xl md:leading-normal">
+              הציצו לתוך הקופסאות
+            </h2>
+            <p className="mt-4 text-center text-lg font-bold text-white md:text-right">
+              שמונה קופסאות עץ מוחשיות, כל אחת מהן מכילה בתוכה כל מה שמורה צריך בשביל למידה מחוץ
+              לקופסא.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {boxes?.map((box, i) => (
+              <Reveal key={box.id} delay={i * 80}>
+                <BoxCard box={box} />
+              </Reveal>
+            ))}
+          </div>
+          {(!boxes || boxes.length === 0) && (
+            <p className="mt-6 text-center text-white/70">הערכות יתווספו בקרוב</p>
+          )}
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="mx-auto mt-12 max-w-6xl px-4 sm:px-6 md:mt-16">
+        <Reveal className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-right">
+          <h2 className="text-2xl font-bold text-purple sm:text-3xl">
+            אפשרויות רכישה והטמעה בצוות
+          </h2>
+          <a
+            href="/#contact"
+            className="hidden items-center gap-2 rounded-[4px] bg-whatsapp px-6 py-2.5 font-bold text-white transition-transform duration-150 hover:scale-95 hover:opacity-90 sm:inline-flex"
+          >
+            דברו איתי לרכישה
+            <Image src="/icons/whatsapp.svg" alt="" width={22} height={22} />
+          </a>
+        </Reveal>
+
+        <div className="mt-8 flex flex-col gap-5">
+          {/* Card 1 */}
+          <Reveal className="flex flex-col gap-9 rounded-[20px] bg-pink-light p-[30px] md:flex-row md:items-center md:gap-5 md:p-8">
+            <div className="flex items-start justify-between gap-[55px] md:contents">
+              <div className="flex min-w-0 flex-1 flex-col gap-[15px] text-right md:w-auto md:shrink-0 md:flex-none">
+                <h3 className="text-2xl font-bold text-[#3d3238]">קופסא בודדת</h3>
+                <p className="font-display text-4xl text-brick sm:text-5xl">1,350 ₪</p>
+              </div>
+              <AnimatedDots variant="three" size={44} seed={1} className="shrink-0 md:order-last" />
+            </div>
+            <div className="h-px w-full shrink-0 bg-brick/40 md:h-16 md:w-px" />
+            <p className="text-lg font-bold text-[#3d3238] md:flex-1">
+              למי שרוצה לבדוק אותנו קודם בקטן.
+              <br />
+              אזהרת ספוילר: אתם הולכים לחזור בשביל השאר
+            </p>
+          </Reveal>
+
+          {/* Card 2 */}
+          <Reveal
+            delay={100}
+            className="flex flex-col gap-9 rounded-[20px] bg-brick p-[30px] md:flex-row md:items-center md:gap-5 md:p-8"
+          >
+            <div className="flex items-start justify-between gap-[55px] md:contents">
+              <div className="flex min-w-0 flex-1 flex-col gap-[15px] text-right md:w-auto md:shrink-0 md:flex-none">
+                <h3 className="text-2xl font-bold text-white">הסדרה המלאה - כל הקופסאות!</h3>
+                <p className="font-display text-4xl text-pink-lighter sm:text-5xl">9,800 ₪</p>
+              </div>
+              <AnimatedDots variant="five" size={40} seed={2} className="shrink-0 md:order-last" />
+            </div>
+            <div className="h-px w-full shrink-0 bg-white/40 md:h-16 md:w-px" />
+            <div className="space-y-2 text-lg font-bold text-white md:flex-1">
+              <p>כל 8 הערכות של ריל מייצרות יחד רצף פדגוגי, תרבות ושפה ייחודית בבית הספר.</p>
+              <p className="font-normal">
+                רכישת הסדרה המלאה כוללת מפגש חשיפה והתנסות של 45 דקות לצוות החינוכי ללא עלות
+                נוספת.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Card 3 */}
+          <Reveal
+            delay={200}
+            className="flex flex-col gap-9 rounded-[20px] border-2 border-terracotta p-[30px] md:flex-row md:items-center md:gap-5 md:p-8"
+          >
+            <div className="flex items-start justify-between gap-[55px] md:contents">
+              <div className="min-w-0 flex-1 text-right text-xl font-bold text-[#3d3238] md:w-[220px] md:shrink-0 md:flex-none">
+                ליווי והטמעה של הקופסאות לאורך שנת לימודים
+              </div>
+              <AnimatedDots variant="six" size={36} seed={3} className="shrink-0 md:order-last" />
+            </div>
+            <div className="h-px w-full shrink-0 bg-brick/40 md:h-16 md:w-px" />
+            <div className="space-y-3 text-right md:flex-1">
+              <div className="flex flex-wrap items-baseline gap-3">
+                <span className="text-lg text-[#3d3238]">
+                  <span className="font-bold">ליווי דו-חודשי:</span> 4 מפגשי ליווי והנחיה לצוות
+                  לאורך השנה
+                </span>
+                <span className="font-display text-2xl text-terracotta">1,600 ₪</span>
+              </div>
+              <div className="flex flex-wrap items-baseline gap-3">
+                <span className="text-lg text-[#3d3238]">
+                  <span className="font-bold">ליווי חודשי:</span> 8 מפגשי ליווי והנחיה לצוות לאורך
+                  השנה
+                </span>
+                <span className="font-display text-2xl text-terracotta">3,200 ₪</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        <a
+          href="/#contact"
+          className="mt-6 flex w-fit items-center gap-2 rounded-[4px] bg-whatsapp px-6 py-2.5 font-bold text-white transition-transform duration-150 hover:scale-95 hover:opacity-90 sm:hidden mx-auto"
+        >
+          דברו איתי לרכישה
+          <Image src="/icons/whatsapp.svg" alt="" width={22} height={22} />
+        </a>
+      </section>
+
+      {/* About */}
+      <section id="about" className="mx-5 mt-12 rounded-lg bg-white md:mt-16">
+        <div className="mx-auto flex max-w-[1140px] flex-col gap-8 px-6 py-[50px] sm:px-10 md:flex-row md:items-start md:gap-12">
+          <Reveal className="relative mx-auto h-[280px] w-[220px] shrink-0 sm:h-[318px] sm:w-[249px]">
+            <div className="absolute inset-3 -z-10 rounded-full bg-purple-dark" />
+            <Image
+              src="/shoval.png"
+              alt="שובל לב ארי"
+              fill
+              className="rounded-full object-cover"
+            />
+          </Reveal>
+          <Reveal delay={120} className="text-right md:flex-1">
+            <p className="text-center font-sans text-lg text-purple md:text-right">
+              נעים להכיר — הסיפור שמאחורי הערכות
+            </p>
+            <h2 className="mt-1 text-center font-display text-4xl text-terracotta sm:text-5xl md:text-right">
+              היי, אני שובל לב ארי
+            </h2>
+            <div className="mt-5 text-lg leading-relaxed text-[#3d3238]">
+              <p>
+                אמא של לביא ושחר, גרה בפרדס חנה. בוגרת תכנית ״רביבים״ באוניברסיטה העברית, מורה
+                לתנ״ך והיסטוריה. בעברי חינכתי כיתות בתיכון,  ואני פשוט אוהבת חינוך.
+              </p>
+              <p className="mt-[11px]">
+                אני מאמינה ששיעור הוא הרבה מעבר להקניית ידע. <span className="font-bold">שיעור הוא מפגש</span>.
+              </p>
+              <p className="mt-[11px]">
+                עם ההתקדמות המהירה של הטכנולוגיה, הרגשתי שהמפגש האמיתי, המבט בעיניים, הלמידה דרך
+                הידיים והחוויה המשותפת, נעדרים מהשיעורים שלנו והילדים, ככל שהם גדלים, הלמידה נעשית
+                הרבה פחות עם הידיים והרבה יותר מול המסך.
+              </p>
+              <p className="mt-[11px]">
+                את הערכות פיתחתי מתוך העבודה בשטח, התלמידים שלי חוו את השיעורים עם העזרים האלה
+                בגרסאות השונות עד שהגעתי לתוצאה הזאת, ואחרי עבודת חקר מעמיקה בלמידה חברתית־רגשית
+                (SEL), דינמיקה קבוצתית ואמנות ניהול הדיון אני מציגה בפניכם את קולקציית הערכות.
+              </p>
+              <p className="mt-[11px] font-bold text-terracotta">המטרה שלי:</p>
+              <p className="text-[31px] font-bold leading-[35px] text-purple">
+                לתת למורים כלים פרקטיים, מעוצבים ונוחים לשימוש,  שיחזירו את היצירתיות לכיתה ויהפכו
+                כל שיעור לשיעור שזוכרים.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="mx-auto mt-12 max-w-4xl px-4 sm:px-6 md:mt-16">
+        <Reveal>
+          <h2 className="text-center font-display text-4xl text-terracotta sm:text-5xl">
+            שאלות ותשובות
+          </h2>
+        </Reveal>
+        <div className="mt-8">
+          {faqs && faqs.length > 0 ? (
+            <FaqAccordion items={faqs} />
+          ) : (
+            <p className="text-center text-foreground/60">שאלות ותשובות יתווספו בקרוב</p>
+          )}
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section id="contact" className="mx-5 mt-12 rounded-lg bg-brick md:mt-16">
+        <div className="mx-auto max-w-[1140px] px-6 py-10 sm:px-10 sm:py-12">
+          <Reveal className="flex flex-col items-center gap-6 text-center">
+            <a
+              href="#"
+              className="inline-flex w-fit items-center gap-2 rounded-[4px] bg-whatsapp px-6 py-2.5 font-bold text-white transition-transform duration-150 hover:scale-95 hover:opacity-90"
+            >
+              מוזמנים לדבר איתנו
+              <Image src="/icons/whatsapp.svg" alt="" width={22} height={22} />
+            </a>
+            <h2 className="font-display text-4xl leading-tight text-white sm:text-5xl md:text-6xl">
+              או להשאיר פרטים ונחזור אליכם!
+            </h2>
+          </Reveal>
+          <Reveal delay={150} className="mt-10">
+            <ContactForm />
+          </Reveal>
+        </div>
+      </section>
+    </main>
   );
 }
