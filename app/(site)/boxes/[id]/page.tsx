@@ -4,6 +4,7 @@ import { supabaseServer } from "@/lib/supabase-server";
 import RandomTriangle from "@/app/components/RandomTriangle";
 import ContactForm from "@/app/components/ContactForm";
 import Reveal from "@/app/components/Reveal";
+import { whatsappLink } from "@/lib/whatsapp";
 
 export default async function BoxPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -93,7 +94,9 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
         <div className="mx-auto max-w-[1140px] px-6 py-10 sm:px-10 sm:py-12">
           <Reveal className="flex flex-col items-center gap-6 text-center">
             <a
-              href="#"
+              href={whatsappLink(`היי, אשמח לפרטים על הזמנת ${box.title}`)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex w-fit items-center gap-2 rounded-[4px] bg-whatsapp px-6 py-2.5 font-bold text-white transition-transform duration-150 hover:scale-95 hover:opacity-90"
             >
               להזמנת הערכה שלחו הודעה

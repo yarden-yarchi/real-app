@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Assistant, Secular_One, Inter } from "next/font/google";
-import Header from "./components/Header";
+import StickyLogout from "./components/StickyLogout";
 import "./globals.css";
 
 const assistant = Assistant({
@@ -36,8 +36,8 @@ export default function RootLayout({
       className={`${assistant.variable} ${secularOne.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
-        <Header />
-        <div className="flex-1">{children}</div>
+        {children}
+        <StickyLogout />
       </body>
     </html>
   );
