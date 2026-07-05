@@ -29,6 +29,19 @@
   --font-inter: var(--font-inter-raw);
 }
 
+@theme {
+  --animate-hero-box-fade: hero-box-fade 300ms ease-out;
+
+  @keyframes hero-box-fade {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

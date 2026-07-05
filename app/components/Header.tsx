@@ -50,16 +50,28 @@ export default function Header() {
           </Link>
           <button
             type="button"
-            aria-label="פתח תפריט"
+            aria-label={open ? "סגור תפריט" : "פתח תפריט"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-pink-light text-purple transition-transform duration-150 hover:scale-95"
           >
-            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
-              <path d="M0 1H20" stroke="currentColor" strokeWidth="2" />
-              <path d="M0 7H20" stroke="currentColor" strokeWidth="2" />
-              <path d="M0 13H20" stroke="currentColor" strokeWidth="2" />
-            </svg>
+            <span className="relative block h-[14px] w-5" aria-hidden="true">
+              <span
+                className={`absolute right-0 top-0 h-0.5 w-full bg-current transition-transform duration-300 ${
+                  open ? "translate-y-[6px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute right-0 top-[6px] h-0.5 w-full bg-current transition-opacity duration-300 ${
+                  open ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute bottom-0 right-0 h-0.5 w-full bg-current transition-transform duration-300 ${
+                  open ? "-translate-y-[6px] -rotate-45" : ""
+                }`}
+              />
+            </span>
           </button>
         </div>
       </div>

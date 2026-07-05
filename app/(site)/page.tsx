@@ -5,6 +5,7 @@ import FaqAccordion from "@/app/components/FaqAccordion";
 import ContactForm from "@/app/components/ContactForm";
 import Reveal from "@/app/components/Reveal";
 import AnimatedDots from "@/app/components/AnimatedDots";
+import HeroBoxStack from "@/app/components/HeroBoxStack";
 import { whatsappLink } from "@/lib/whatsapp";
 
 export default async function Home() {
@@ -20,7 +21,7 @@ export default async function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-[10px] pt-[126px] md:px-6">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
-          <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:pt-6">
+          <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:self-stretch md:justify-center">
             <div className="flex flex-col items-center md:items-start">
               <div className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-brick">
                 למידה היא
@@ -35,19 +36,15 @@ export default async function Home() {
               </div>
             </div>
             <p className="text-2xl font-bold text-purple">ערכה פיזית — רב שימושית — מודולארית</p>
+            <div className="flex items-center gap-2.5 rounded-lg bg-pink-lighter p-2.5">
+              <AnimatedDots variant="four" size={25} seed={4} cycle={3} />
+              <span className="text-lg font-semibold leading-none text-brick">
+                נסו להציץ לקופסאות
+              </span>
+            </div>
           </Reveal>
-          <Reveal
-            delay={150}
-            className="relative w-full max-w-[300px] shrink-0 md:max-w-[380px] md:flex-1"
-          >
-            <div className="relative aspect-[407/508] w-full overflow-hidden rounded-lg bg-pink-light/50" />
-            <Image
-              src="/icons/open-box-tooltip.svg"
-              alt="לחצו על כל קופסא כדי לפתוח אותה"
-              width={164}
-              height={80}
-              className="absolute -bottom-5 -left-4 hidden sm:block"
-            />
+          <Reveal delay={150} className="w-full max-w-[254px] shrink-0 md:flex-1">
+            <HeroBoxStack boxes={boxes ?? []} />
           </Reveal>
         </div>
       </section>
