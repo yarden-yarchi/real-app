@@ -14,18 +14,29 @@ export const metadata = {
 };
 
 // Structured data so Google connects the brand ("ריל") with its founder
-// ("שובל לב ארי") in search results.
+// ("שובל לב ארי") in search results. Shoval is modeled as her own Person
+// entity (not just a nested field) and cross-linked via @id so both can
+// surface independently — e.g. a Knowledge Panel for her name.
+const shovalJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#shoval-lev-ari`,
+  name: "שובל לב ארי",
+  jobTitle: "מורה ומפתחת ערכות הלמידה של ריל",
+  description:
+    "מורה לתנ\"ך והיסטוריה, בוגרת תכנית \"רביבים\" באוניברסיטה העברית, יוצרת קולקציית ערכות הלמידה של ריל.",
+  worksFor: { "@id": `${SITE_URL}/#organization` },
+  url: SITE_URL,
+};
+
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
   name: "ריל",
   alternateName: "REAL",
   url: SITE_URL,
-  founder: {
-    "@type": "Person",
-    name: "שובל לב ארי",
-    jobTitle: "מורה ומפתחת ערכות הלמידה של ריל",
-  },
+  founder: { "@id": `${SITE_URL}/#shoval-lev-ari` },
   description:
     "ערכות למידה פיזיות, רב שימושיות ומודולריות למורים, שפיתחה המורה שובל לב ארי.",
 };
@@ -44,23 +55,27 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(shovalJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative z-10 mx-auto max-w-6xl px-[10px] pt-[126px] md:px-6">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:self-stretch md:justify-center">
-            <div className="flex flex-col items-center md:items-start">
-              <div className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-brick">
+            <h1 className="flex flex-col items-center md:items-start">
+              <span className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-brick">
                 למידה היא
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-x-[26px] gap-y-1 md:justify-start">
+              </span>
+              <span className="flex flex-wrap items-center justify-center gap-x-[26px] gap-y-1 md:justify-start">
                 <span className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-terracotta">
                   מפגש
                 </span>
                 <span className="max-w-[260px] font-sans text-lg font-bold text-purple sm:max-w-[300px] sm:text-xl">
                   אפשר להחזיר את היצירתיות לכיתה ולהפוך כל שיעור - לשיעור שזוכרים!
                 </span>
-              </div>
-            </div>
+              </span>
+            </h1>
             <p className="text-2xl font-bold text-purple">ערכה פיזית — רב שימושית — מודולארית</p>
             <div className="flex items-center gap-2.5 rounded-lg bg-pink-lighter p-2.5">
               <span className="text-lg font-semibold leading-none text-brick">
@@ -218,7 +233,6 @@ export default async function Home() {
               src="/shoval.png"
               alt="שובל לב ארי"
               fill
-              unoptimized
               className="rounded-full object-cover"
             />
           </Reveal>

@@ -31,9 +31,10 @@ export default function ContactForm() {
         <input
           name="phone"
           type="tel"
+          dir="rtl"
           required
           placeholder="מספר טלפון לחזרה"
-          className="w-full rounded-[10px] bg-cream px-5 py-3 text-foreground placeholder:text-foreground/60 focus:outline-none sm:flex-1"
+          className="w-full rounded-[10px] bg-cream px-5 py-3 text-right text-foreground placeholder:text-foreground/60 focus:outline-none sm:flex-1"
         />
         <button
           type="submit"

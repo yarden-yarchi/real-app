@@ -41,6 +41,8 @@ export const metadata: Metadata = {
     "למידה חברתית רגשית",
     "SEL",
   ],
+  authors: [{ name: "שובל לב ארי", url: SITE_URL }],
+  creator: "שובל לב ארי",
   openGraph: {
     type: "website",
     locale: "he_IL",

@@ -35,7 +35,6 @@ export default async function AdminBoxesPage() {
                   src={box.gallery_images[0]}
                   alt={box.title}
                   fill
-                  unoptimized
                   className="object-cover"
                 />
               )}

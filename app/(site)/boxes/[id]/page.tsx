@@ -52,7 +52,6 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
             fill
             priority
             className="object-cover"
-            unoptimized
           />
         )}
         <div

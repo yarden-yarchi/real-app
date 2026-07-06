@@ -49,7 +49,6 @@ export default function HeroBoxStack({ boxes }: { boxes: Box[] }) {
             alt={item.title}
             width={441}
             height={item.height}
-            unoptimized
             loading="eager"
             className="h-auto w-full"
           />

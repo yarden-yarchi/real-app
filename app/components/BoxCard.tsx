@@ -18,7 +18,6 @@ export default function BoxCard({ box }: { box: Box }) {
             alt={box.title}
             fill
             className="object-cover"
-            unoptimized
           />
         )}
       </div>
