@@ -19,14 +19,14 @@ const STACK: {
   top: string;
   z: string;
 }[] = [
-  { src: "/hero-boxes/escape-room.png", title: "חדר בריחה", height: 202, left: "12.836%", top: "0%", z: "z-[8]" },
-  { src: "/hero-boxes/dress-rehearsal.png", title: "חזרה גנרלית", height: 204, left: "5.917%", top: "11.892%", z: "z-[7]" },
+  { src: "/hero-boxes/talking.png", title: "מדברים", height: 207, left: "12.836%", top: "0%", z: "z-[8]" },
+  { src: "/hero-boxes/balance.png", title: "איזון", height: 211, left: "5.917%", top: "11.892%", z: "z-[7]" },
   { src: "/hero-boxes/characters.png", title: "דמויות", height: 207, left: "13.259%", top: "23.139%", z: "z-[6]" },
-  { src: "/hero-boxes/balance.png", title: "איזון", height: 211, left: "5.87%", top: "33.978%", z: "z-[5]" },
-  { src: "/hero-boxes/dynamics.png", title: "דינמיקה", boxTitle: "דינמיקה קבוצתית", height: 206, left: "12.83%", top: "46.043%", z: "z-[4]" },
-  { src: "/hero-boxes/shapes.png", title: "צורות", height: 203, left: "7.536%", top: "57.753%", z: "z-[3]" },
-  { src: "/hero-boxes/preparation-and-processing.png", title: "הכנה ועיבוד", height: 207, left: "0%", top: "69.812%", z: "z-[2]" },
-  { src: "/hero-boxes/talking.png", title: "מדברים", height: 207, left: "5.365%", top: "81.418%", z: "z-[1]" },
+  { src: "/hero-boxes/dynamics.png", title: "דינמיקה", boxTitle: "דינמיקה קבוצתית", height: 206, left: "5.87%", top: "33.978%", z: "z-[5]" },
+  { src: "/hero-boxes/preparation-and-processing.png", title: "הכנה ועיבוד", height: 207, left: "12.83%", top: "46.043%", z: "z-[4]" },
+  { src: "/hero-boxes/escape-room.png", title: "חדר בריחה", height: 202, left: "7.536%", top: "57.753%", z: "z-[3]" },
+  { src: "/hero-boxes/shapes.png", title: "צורות", height: 203, left: "0%", top: "69.812%", z: "z-[2]" },
+  { src: "/hero-boxes/dress-rehearsal.png", title: "חזרה גנרלית", height: 204, left: "5.365%", top: "81.418%", z: "z-[1]" },
 ];
 
 export default function HeroBoxStack({ boxes }: { boxes: Box[] }) {

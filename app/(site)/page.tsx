@@ -42,7 +42,10 @@ const organizationJsonLd = {
 };
 
 export default async function Home() {
-  const { data: boxes } = await supabaseServer.from("boxes").select("*");
+  const { data: boxes } = await supabaseServer
+    .from("boxes")
+    .select("*")
+    .order("sort_order", { ascending: true });
   const { data: faqs } = await supabaseServer
     .from("faqs")
     .select("*")
@@ -76,7 +79,7 @@ export default async function Home() {
                 </span>
               </span>
             </h1>
-            <p className="text-2xl font-bold text-purple">ערכה פיזית — רב שימושית — מודולארית</p>
+            <p className="text-2xl font-bold text-purple">ערכה פיזית | רב שימושית | מודולארית</p>
             <div className="flex items-center gap-2.5 rounded-lg bg-pink-lighter p-2.5">
               <span className="text-lg font-semibold leading-none text-brick">
                 נסו להציץ לקופסאות

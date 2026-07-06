@@ -104,6 +104,16 @@ export async function saveBox(_prev: ActionState, formData: FormData): Promise<A
         .filter(Boolean),
     };
 
+    if (!id) {
+      const { data: last } = await supabaseServer
+        .from("boxes")
+        .select("sort_order")
+        .order("sort_order", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      row.sort_order = (last?.sort_order ?? 0) + 1;
+    }
+
     const desktopFile = formData.get("desktop_image");
     if (isUploadedFile(desktopFile)) row.desktop_image = await uploadImage(desktopFile, "desktop");
 
@@ -138,6 +148,21 @@ export async function saveBox(_prev: ActionState, formData: FormData): Promise<A
 
   revalidateSite();
   redirect("/real-admin/boxes");
+}
+
+export async function reorderBoxes(orderedIds: string[]) {
+  await requireAdminUser();
+
+  for (const [index, id] of orderedIds.entries()) {
+    const { error } = await supabaseServer
+      .from("boxes")
+      .update({ sort_order: index + 1 })
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidateSite();
+  revalidatePath("/real-admin/boxes");
 }
 
 export async function deleteBox(id: string) {
