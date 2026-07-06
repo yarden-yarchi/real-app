@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 type Dot = { cx: number; cy: number; r: number };
 
-const VARIANTS: Record<"three" | "four" | "five" | "six", { width: number; height: number; fill: string; dots: Dot[] }> = {
+const VARIANTS: Record<"three" | "five" | "six", { width: number; height: number; fill: string; dots: Dot[] }> = {
   three: {
     width: 63,
     height: 63,
@@ -13,17 +13,6 @@ const VARIANTS: Record<"three" | "four" | "five" | "six", { width: number; heigh
       { cx: 10, cy: 10, r: 10 },
       { cx: 30.8359, cy: 30.8359, r: 10 },
       { cx: 52.4434, cy: 52.4434, r: 10 },
-    ],
-  },
-  four: {
-    width: 25,
-    height: 25,
-    fill: "#ffffff",
-    dots: [
-      { cx: 4.75, cy: 4.75, r: 4.75 },
-      { cx: 20.25, cy: 4.75, r: 4.75 },
-      { cx: 4.75, cy: 20.25, r: 4.75 },
-      { cx: 20.25, cy: 20.25, r: 4.75 },
     ],
   },
   five: {
@@ -93,14 +82,12 @@ export default function AnimatedDots({
   size,
   seed = 1,
   cardIndex = 0,
-  cycle = 8,
   className = "",
 }: {
-  variant: "three" | "four" | "five" | "six";
+  variant: "three" | "five" | "six";
   size?: number;
   seed?: number;
   cardIndex?: number;
-  cycle?: number;
   className?: string;
 }) {
   const { width, height, fill, dots } = VARIANTS[variant];
@@ -109,6 +96,7 @@ export default function AnimatedDots({
   const rand = seededRandom(seed);
 
   const duration = 1.2;
+  const cycle = 8;
   const groupDelay = cardIndex * 1.8;
 
   return (

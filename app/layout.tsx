@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Assistant, Secular_One, Inter } from "next/font/google";
 import StickyLogout from "./components/StickyLogout";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const assistant = Assistant({
@@ -19,9 +20,35 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const SITE_DESCRIPTION =
+  "ריל (REAL) — ערכות למידה פיזיות, רב שימושיות ומודולריות שפיתחה המורה שובל לב ארי. שמונה קופסאות עץ שמחזירות את היצירתיות, המפגש והלמידה דרך הידיים לכיתה.";
+
 export const metadata: Metadata = {
-  title: "ריל — הערכות",
-  description: "ערכות לימוד פיזיות, רב שימושיות ומודולריות",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "ריל — ערכות למידה מבית שובל לב ארי",
+    template: "%s | ריל",
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "ריל",
+    "REAL",
+    "שובל לב ארי",
+    "ערכות למידה",
+    "ערכות לימוד",
+    "למידה חווייתית",
+    "כלים למורים",
+    "למידה חברתית רגשית",
+    "SEL",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "he_IL",
+    siteName: "ריל",
+    title: "ריל — ערכות למידה מבית שובל לב ארי",
+    description: SITE_DESCRIPTION,
+    url: "/",
+  },
 };
 
 export default function RootLayout({

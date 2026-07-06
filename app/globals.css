@@ -40,6 +40,26 @@
       opacity: 1;
     }
   }
+
+  --animate-arrow-wiggle: arrow-wiggle 3s ease-in-out infinite;
+
+  /* Idle most of the cycle, then two quick nudges in the direction the
+     arrow points (translateX is applied inside the rotated wrapper). */
+  @keyframes arrow-wiggle {
+    0%,
+    55%,
+    69%,
+    83%,
+    100% {
+      transform: translateX(0);
+    }
+    62% {
+      transform: translateX(-9px);
+    }
+    76% {
+      transform: translateX(-5px);
+    }
+  }
 }
 
 html {

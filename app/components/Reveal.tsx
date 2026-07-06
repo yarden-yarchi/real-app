@@ -5,10 +5,13 @@ import { useEffect, useRef, useState } from "react";
 export default function Reveal({
   children,
   delay = 0,
+  fade = false,
   className = "",
 }: {
   children: React.ReactNode;
   delay?: number;
+  // fade-only entrance, without the downward slide
+  fade?: boolean;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -36,7 +39,7 @@ export default function Reveal({
     <div
       ref={ref}
       className={`transition-all duration-700 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"
+        visible ? "translate-y-0 opacity-100" : `${fade ? "" : "-translate-y-6"} opacity-0`
       } ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
     >

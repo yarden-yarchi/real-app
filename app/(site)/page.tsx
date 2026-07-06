@@ -7,6 +7,28 @@ import Reveal from "@/app/components/Reveal";
 import AnimatedDots from "@/app/components/AnimatedDots";
 import HeroBoxStack from "@/app/components/HeroBoxStack";
 import { whatsappLink } from "@/lib/whatsapp";
+import { SITE_URL } from "@/lib/site";
+
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
+// Structured data so Google connects the brand ("ריל") with its founder
+// ("שובל לב ארי") in search results.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ריל",
+  alternateName: "REAL",
+  url: SITE_URL,
+  founder: {
+    "@type": "Person",
+    name: "שובל לב ארי",
+    jobTitle: "מורה ומפתחת ערכות הלמידה של ריל",
+  },
+  description:
+    "ערכות למידה פיזיות, רב שימושיות ומודולריות למורים, שפיתחה המורה שובל לב ארי.",
+};
 
 export default async function Home() {
   const { data: boxes } = await supabaseServer.from("boxes").select("*");
@@ -18,8 +40,12 @@ export default async function Home() {
 
   return (
     <main className="pb-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-[10px] pt-[126px] md:px-6">
+      <section className="relative z-10 mx-auto max-w-6xl px-[10px] pt-[126px] md:px-6">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:self-stretch md:justify-center">
             <div className="flex flex-col items-center md:items-start">
@@ -37,9 +63,19 @@ export default async function Home() {
             </div>
             <p className="text-2xl font-bold text-purple">ערכה פיזית — רב שימושית — מודולארית</p>
             <div className="flex items-center gap-2.5 rounded-lg bg-pink-lighter p-2.5">
-              <AnimatedDots variant="four" size={25} seed={4} cycle={3} />
               <span className="text-lg font-semibold leading-none text-brick">
                 נסו להציץ לקופסאות
+              </span>
+              {/* Rotated wrapper points the arrow down on mobile; the wiggle
+                  translates inside it, so the nudge follows the arrow. */}
+              <span className="inline-flex -rotate-90 md:rotate-0">
+                <Image
+                  src="/icons/arrow-left.svg"
+                  alt=""
+                  width={31}
+                  height={15}
+                  className="animate-arrow-wiggle"
+                />
               </span>
             </div>
           </Reveal>
@@ -50,7 +86,7 @@ export default async function Home() {
       </section>
 
       {/* Boxes */}
-      <section id="boxes" className="mx-[10px] md:mx-5 mt-12 rounded-lg bg-purple px-4 py-12 sm:px-6 md:mt-16 md:py-16">
+      <section id="boxes" className="mx-[10px] md:mx-5 -mt-[35px] rounded-lg bg-purple px-4 py-12 sm:px-6 md:py-16">
         <div className="mx-auto max-w-[1140px]">
           <Reveal>
             <h2 className="text-center font-display text-[4em] leading-none text-white md:text-right md:text-6xl md:leading-normal">
