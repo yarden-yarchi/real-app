@@ -25,7 +25,7 @@ export default function BoxCard({ box }: { box: Box }) {
       <div className="flex flex-col gap-2 px-5 pt-2.5">
         <h3 className="text-xl font-bold text-[#3d3238]">{box.title}</h3>
         {box.description && (
-          <p className="line-clamp-1 text-lg text-[#3d3238]">{box.description}</p>
+          <p className="line-clamp-2 text-lg text-[#3d3238]">{box.description}</p>
         )}
         <Link
           href={`/boxes/${box.id}`}

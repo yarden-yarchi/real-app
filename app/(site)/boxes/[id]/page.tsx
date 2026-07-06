@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { supabaseServer } from "@/lib/supabase-server";
@@ -61,6 +62,21 @@ export default async function BoxPage({ params }: { params: Promise<{ id: string
               "linear-gradient(180deg, rgba(140, 61, 1, 0) 38.31%, rgba(140, 61, 1, 0.6) 92.4%)",
           }}
         />
+        <Link
+          href="/"
+          className="absolute top-[88px] right-6 z-20 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-bold text-[#96342B] transition hover:opacity-80 sm:right-8 md:top-[96px]"
+        >
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1 1L7 7L1 13"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          חזרה
+        </Link>
         <div className="relative z-10 w-full px-4 pb-12 sm:px-6 md:px-10">
           <Reveal fade className="mx-auto max-w-[1140px] text-center">
             <h1 className="font-display text-[clamp(2.5rem,8.73vw,8.25rem)] leading-none text-white">
