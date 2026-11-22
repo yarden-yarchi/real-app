@@ -84,6 +84,7 @@ function isUploadedFile(value: FormDataEntryValue | null): value is File {
 
 function revalidateSite() {
   revalidatePath("/", "layout");
+  revalidatePath("/sitemap.xml");
 }
 
 export async function saveBox(_prev: ActionState, formData: FormData): Promise<ActionState> {

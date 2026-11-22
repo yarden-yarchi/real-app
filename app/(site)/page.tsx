@@ -67,6 +67,8 @@ export default async function Home() {
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <Reveal className="flex flex-col items-center gap-5 text-center md:items-start md:text-right md:flex-1 md:self-stretch md:justify-center">
             <h1 className="flex flex-col items-center md:items-start">
+              {/* Keyword-bearing prefix for search engines and screen readers. */}
+              <span className="sr-only">ריל — ערכות למידה פיזיות לכיתה: </span>
               <span className="font-display text-[clamp(4rem,8.73vw,8.25rem)] leading-none text-brick">
                 למידה היא
               </span>
@@ -151,7 +153,7 @@ export default async function Home() {
             <div className="flex items-start justify-between gap-[55px] md:contents">
               <div className="flex min-w-0 flex-1 flex-col gap-[15px] text-right md:w-auto md:shrink-0 md:flex-none">
                 <h3 className="text-2xl font-bold text-[#3d3238]">קופסא בודדת</h3>
-                <p className="font-display text-4xl text-brick sm:text-5xl">1,350 ₪</p>
+                <p className="font-display text-4xl text-brick sm:text-5xl">1,500 ₪</p>
               </div>
               <AnimatedDots variant="three" size={44} seed={1} cardIndex={0} className="shrink-0 md:order-last" />
             </div>
@@ -171,7 +173,7 @@ export default async function Home() {
             <div className="flex items-start justify-between gap-[55px] md:contents">
               <div className="flex min-w-0 flex-1 flex-col gap-[15px] text-right md:w-auto md:shrink-0 md:flex-none">
                 <h3 className="text-2xl font-bold text-white">הסדרה המלאה - כל הקופסאות!</h3>
-                <p className="font-display text-4xl text-pink-lighter sm:text-5xl">9,800 ₪</p>
+                <p className="font-display text-4xl text-pink-lighter sm:text-5xl">10,800 ₪</p>
               </div>
               <AnimatedDots variant="five" size={40} seed={2} cardIndex={1} className="shrink-0 md:order-last" />
             </div>
